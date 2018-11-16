@@ -11,7 +11,7 @@ public class BankServiceImpl implements IBankService {
     }
 
     @Override
-    public void transfer(String accountCode, double amount) {
+    public void deposit(String accountCode, double amount) {
 
     }
 

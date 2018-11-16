@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 
 public interface IBankService {
     Account checkAccount(String accountCode);
-    void transfer(String accountCode,double amount);
+    void deposit(String accountCode,double amount);
     void withdraw(String accountCode,double amount);
     Page<Operation> operationsList(String accountCode,int page,int size);
 
