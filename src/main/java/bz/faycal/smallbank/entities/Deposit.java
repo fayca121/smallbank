@@ -10,7 +10,7 @@ import java.util.Date;
 @Entity
 @DiscriminatorValue("D")
 public class Deposit extends Operation {
-    
+
     public Deposit(Date operationDate, double amount, Account account) {
         super(operationDate, amount, account);
     }
