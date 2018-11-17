@@ -29,18 +29,18 @@ public class BootLoader implements CommandLineRunner {
 
         Account a1=accountRepository.save(new CurrentAccount("A1",new Date(),90000,c1,
                 60000));
-        Account a2=accountRepository.save(new SavingAccount("A1",new Date(),50000,c2,
+        Account a2=accountRepository.save(new SavingAccount("A2",new Date(),50000,c2,
                 5.5));
 
         operationRepository.save(new Withdrawal(new Date(),9000,a1));
         operationRepository.save(new Withdrawal(new Date(),4000,a1));
         operationRepository.save(new Withdrawal(new Date(),5000,a1));
-        operationRepository.save(new Transfer(new Date(),1000,a1));
+        operationRepository.save(new Deposit(new Date(),1000,a1));
 
         operationRepository.save(new Withdrawal(new Date(),9000,a2));
         operationRepository.save(new Withdrawal(new Date(),4000,a2));
         operationRepository.save(new Withdrawal(new Date(),5000,a2));
-        operationRepository.save(new Transfer(new Date(),1000,a2));
+        operationRepository.save(new Deposit(new Date(),1000,a2));
 
 
 
