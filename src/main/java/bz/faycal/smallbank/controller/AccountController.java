@@ -26,12 +26,14 @@ public class AccountController {
 
 
     @GetMapping("/searchAccount")
-    public String searchAccount(Model model, String accountCode){
+    public String searchAccount(Model model, String accountCode,int page){
         model.addAttribute("accountCode",accountCode);
+        model.addAttribute("page",page);
         try {
             Account account = bankService.checkAccount(accountCode);
-            Page<Operation> operations=bankService.operationsList(accountCode,0,4);
+            Page<Operation> operations=bankService.operationsList(accountCode,page,2);
             model.addAttribute("operations",operations.getContent());
+            model.addAttribute("totalPages",operations.getTotalPages());
             model.addAttribute("account",account);
         }catch (Exception e){
             model.addAttribute("exception",e);

@@ -15,6 +15,7 @@
                 <form class="form-inline" th:action="@{/searchAccount}">
                     <label class="mr-sm-2" for="acode">Account code:</label>
                     <input id="acode" type="text" name="accountCode" th:value="${accountCode}" class="form-control mr-sm-2"/>
+                    <input type="hidden" name="page" th:value="0"/>
                     <button type="submit" class="btn btn-primary mr-sm-2">Find</button>
                 </form>
                 <br/>
@@ -80,6 +81,20 @@
                         <td th:text="${o.amount}"></td>
                     </tr>
                 </table>
+                <ul class="pagination">
+                    <li class="page-item" th:classappend="${page==0}? disabled">
+                        <a class="page-link"
+                           th:href="@{/searchAccount(page=${page-1},accountCode=${accountCode})}"}>Previous</a>
+                    </li>
+                    <li class="page-item" th:classappend="${i==page}? disabled" th:each="i:${#numbers.sequence(0,totalPages-1)}">
+                        <a class="page-link" th:text="${i}"
+                           th:href="@{/searchAccount(page=${i},accountCode=${accountCode})}"></a>
+                    </li>
+                    <li class="page-item" th:classappend="${page==totalPages-1}? disabled">
+                        <a class="page-link"
+                           th:href="@{/searchAccount(page=${page+1},accountCode=${accountCode})}"}>Next</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
