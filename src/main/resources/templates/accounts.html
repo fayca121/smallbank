@@ -1,13 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
-      layout:decorator="template1">
+      layout:decorator="~{template1}">
 <head>
     <meta charset="UTF-8">
     <title>smallbank</title>
 </head>
 <body>
-<div layout:fragment="content">
-    <h3>Test</h3>
+<div class="row" layout:fragment="content">
+
+    <div class="col-md-6">
+        <div class="card bg-light">
+            <div class="card-header">Account search</div>
+            <div class="card-body"></div>
+        </div>
+        <div class="card bg-light">
+            <div class="card-header">Account information</div>
+            <div class="card-body"></div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card bg-light">
+            <div class="card-header">Operations Account</div>
+            <div class="card-body"></div>
+        </div>
+        <div class="card bg-light">
+            <div class="card-header">Operations list</div>
+            <div class="card-body"></div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
