@@ -43,4 +43,9 @@ public class AccountController {
 
         return "accounts";
     }
+
+    @GetMapping("/createOperation")
+    public String createOperation(Model model){
+        return "accounts";
+    }
 }

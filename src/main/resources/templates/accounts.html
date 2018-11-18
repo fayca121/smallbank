@@ -62,6 +62,43 @@
         <div class="card bg-light" th:if="${account}">
             <div class="card-header">Operations Account</div>
             <div class="card-body">
+                <form th:action="@{/createOperation}">
+                    <div>
+                        <input type="hidden" name="accountCode" th:value="${accountCode}"/>
+                        <label>Account code:</label>
+                        <label th:text="${accountCode}"></label>
+                    </div>
+                    <div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="operationType" value="DEP"
+                                   checked="checked"
+                                       onchange="document.getElementById('toacode2').style.display='none'">Deposit
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="operationType"
+                                       value="DRW"
+                                       onchange="document.getElementById('toacode2').style.display='none'">Withdraw
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <input type="radio" class="form-check-input" name="operationType"
+                                   value="TRF"
+                                   onchange="document.getElementById('toacode2').style.display='block'">Transfer
+                        </div>
+                    </div>
+                    <div id="toacode2" class="form-group" style="display: none">
+                        <label for="acode2">To:</label>
+                        <input id="acode2" type="text" class="form-control" name="accountCode2">
+                    </div>
+                    <div class="form-group">
+                        <label for="amt">Amount:</label>
+                        <input id="amt" type="text" class="form-control" name="amount">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
             </div>
         </div>
         <div class="card bg-light" th:if="${account}">
