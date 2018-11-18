@@ -71,6 +71,7 @@ public class AccountController {
             }
         }
 
-        return searchAccount(model, accountCode,Optional.of(INITIAL_PAGE));
+        //return searchAccount(model, accountCode,Optional.of(INITIAL_PAGE));
+        return "redirect:/searchAccount?accountCode="+accountCode;
     }
 }
