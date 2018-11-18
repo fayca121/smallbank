@@ -48,12 +48,18 @@ public class BankServiceImpl implements IBankService {
         double fc=0;
         if(account instanceof CurrentAccount)
             fc=((CurrentAccount)account).getOverdraft();
-        if(account.getBalance()+fc<amount)
+        if(account.getBalance()+fc< amount)
             throw new RuntimeException("insufficient balance");
         Withdrawal withdrawal=new Withdrawal(new Date(),amount,account);
         operationRepository.save(withdrawal);
         account.setBalance(account.getBalance()-amount);
         accountRepository.save(account);
+    }
+
+    @Override
+    public void transfer(String accountSource, String accountTarget, double amount) {
+        withdraw(accountSource,amount);
+        deposit(accountTarget, amount);
     }
 
     @Override

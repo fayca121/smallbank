@@ -8,11 +8,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Date;
 import java.util.Optional;
 
 @Controller
 public class AccountController {
+    private static final int INITIAL_PAGE = 0;
+    private static final int INITIAL_PAGE_SIZE = 5;
 
     private IBankService bankService;
 
@@ -33,7 +38,8 @@ public class AccountController {
         model.addAttribute("page",page.orElse(0));
         try {
             Account account = bankService.checkAccount(accountCode);
-            Page<Operation> operations=bankService.operationsList(accountCode,page.orElse(0), 2);
+            Page<Operation> operations=bankService.operationsList(accountCode,page.orElse(INITIAL_PAGE),
+                    INITIAL_PAGE_SIZE);
             model.addAttribute("operations",operations.getContent());
             model.addAttribute("totalPages",operations.getTotalPages());
             model.addAttribute("account",account);
@@ -44,8 +50,27 @@ public class AccountController {
         return "accounts";
     }
 
-    @GetMapping("/createOperation")
-    public String createOperation(Model model){
-        return "accounts";
+    @PostMapping("/createOperation")
+    public String createOperation(Model model,String accountCode,String accountCode2,
+                                  String operationType,double amount){
+        Account account1 = bankService.checkAccount(accountCode);
+        switch (operationType){
+            case "DEP": bankService.deposit(accountCode,amount);
+            break;
+            case "DRW":try{
+                bankService.withdraw(accountCode,amount);
+            }catch (Exception e){
+                model.addAttribute("exception2",e);
+            }
+            break;
+            case "TRF":try {
+                Account account2 = bankService.checkAccount(accountCode2);
+                bankService.transfer(accountCode,accountCode2,amount);
+            }catch (Exception e){
+                model.addAttribute("exception2",e);
+            }
+        }
+
+        return searchAccount(model, accountCode,Optional.of(INITIAL_PAGE));
     }
 }

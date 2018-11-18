@@ -19,7 +19,7 @@
                 </form>
                 <br/>
                 <div class="alert alert-danger" th:if="${exception}">
-                    <strong>Error!</strong> Account not found.
+                    <strong>Error!</strong> <label th:text="${exception.getMessage()}"></label> .
                 </div>
             </div>
         </div>
@@ -62,7 +62,7 @@
         <div class="card bg-light" th:if="${account}">
             <div class="card-header">Operations Account</div>
             <div class="card-body">
-                <form th:action="@{/createOperation}">
+                <form th:action="@{/createOperation}" method="post">
                     <div>
                         <input type="hidden" name="accountCode" th:value="${accountCode}"/>
                         <label>Account code:</label>
@@ -99,6 +99,10 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
+                <br/>
+                <div class="alert alert-danger" th:if="${exception2}">
+                    <strong>Error!</strong> <label th:text="${exception2.getMessage()}"></label> .
+                </div>
             </div>
         </div>
         <div class="card bg-light" th:if="${account}">
