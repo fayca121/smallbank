@@ -58,6 +58,8 @@ public class BankServiceImpl implements IBankService {
 
     @Override
     public void transfer(String accountSource, String accountTarget, double amount) {
+        if(accountSource.equals(accountTarget))
+            throw new RuntimeException("You cannot do that on the same account");
         withdraw(accountSource,amount);
         deposit(accountTarget, amount);
     }
