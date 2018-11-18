@@ -15,7 +15,6 @@
                 <form class="form-inline" th:action="@{/searchAccount}">
                     <label class="mr-sm-2" for="acode">Account code:</label>
                     <input id="acode" type="text" name="accountCode" th:value="${accountCode}" class="form-control mr-sm-2"/>
-                    <input type="hidden" name="page" th:value="0"/>
                     <button type="submit" class="btn btn-primary mr-sm-2">Find</button>
                 </form>
                 <br/>
@@ -62,7 +61,8 @@
     <div class="col-md-6">
         <div class="card bg-light" th:if="${account}">
             <div class="card-header">Operations Account</div>
-            <div class="card-body"></div>
+            <div class="card-body">
+            </div>
         </div>
         <div class="card bg-light" th:if="${account}">
             <div class="card-header">Operations list</div>
