@@ -108,10 +108,11 @@
         <div class="card bg-light" th:if="${account}">
             <div class="card-header">Operations list</div>
             <div class="card-body">
+                <div class="container">
                 <table class="table table-striped">
                     <tr>
-                        <th>Operation number</th>
-                        <th>Operation type</th>
+                        <th>Number</th>
+                        <th>Type</th>
                         <th>Date</th>
                         <th>Amount</th>
                     </tr>
@@ -136,6 +137,7 @@
                            th:href="@{/searchAccount(page=${page+1},accountCode=${accountCode})}"}>Next</a>
                     </li>
                 </ul>
+                </div>
             </div>
         </div>
     </div>
