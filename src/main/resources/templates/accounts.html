@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
-      layout:decorator="~{template1}" xmlns:th="http://www.thymeleaf.org/">
+      layout:decorator="~{template1}" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>smallbank</title>
@@ -59,7 +60,7 @@
     </div>
 
     <div class="col-md-6">
-        <div class="card bg-light" th:if="${account}">
+        <div class="card bg-light" th:if="${account}"  sec:authorize="hasRole('ROLE_ADMIN')">
             <div class="card-header">Operations Account</div>
             <div class="card-body">
                 <form th:action="@{/createOperation}" method="post">
