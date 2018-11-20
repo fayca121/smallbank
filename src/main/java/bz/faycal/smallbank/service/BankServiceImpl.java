@@ -35,6 +35,8 @@ public class BankServiceImpl implements IBankService {
 
     @Override
     public void deposit(String accountCode, double amount) {
+        if(amount<=0)
+            throw new RuntimeException("The amount should be greater than 0");
         Account account=checkAccount(accountCode);
         Deposit deposit=new Deposit(new Date(),amount,account);
         operationRepository.save(deposit);
