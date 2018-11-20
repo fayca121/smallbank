@@ -1,5 +1,7 @@
 package bz.faycal.smallbank.configuration;
 
+import bz.faycal.smallbank.service.CustomUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,6 +18,13 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private CustomUserDetailsService customUserDetailsService;
+
+    @Autowired
+    public SecurityConfig(CustomUserDetailsService customUserDetailsService){
+        this.customUserDetailsService=customUserDetailsService;
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         //return new BCryptPasswordEncoder();
@@ -26,10 +35,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception{
         /*authenticationManagerBuilder.userDetailsService(null)
                 .passwordEncoder(new BCryptPasswordEncoder());*/
-        authenticationManagerBuilder.inMemoryAuthentication()
+        authenticationManagerBuilder.userDetailsService(customUserDetailsService)
+                .passwordEncoder(NoOpPasswordEncoder.getInstance());
+        /*authenticationManagerBuilder.inMemoryAuthentication()
                 .withUser("admin").password("1234").roles("ADMIN","USER");
         authenticationManagerBuilder.inMemoryAuthentication()
-                .withUser("user").password("1234").roles("USER");
+                .withUser("user").password("1234").roles("USER");*/
     }
 
     @Override
