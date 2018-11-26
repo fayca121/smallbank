@@ -7,8 +7,7 @@ import bz.faycal.smallbank.repository.OperationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
+import java.util.*;
 
 @Component
 public class BootLoader implements CommandLineRunner {
@@ -22,8 +21,10 @@ public class BootLoader implements CommandLineRunner {
     @Autowired
     OperationRepository operationRepository;
 
+
     @Override
     public void run(String... args) throws Exception {
+
         Client c1=clientRepository.save(new Client("Faycal","bz.faycal@gmail.com"));
         Client c2=clientRepository.save(new Client("Wassila","wassou@gmail.com"));
 

@@ -27,16 +27,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        //return new BCryptPasswordEncoder();
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception{
-        /*authenticationManagerBuilder.userDetailsService(null)
-                .passwordEncoder(new BCryptPasswordEncoder());*/
         authenticationManagerBuilder.userDetailsService(customUserDetailsService)
-                .passwordEncoder(NoOpPasswordEncoder.getInstance());
+                .passwordEncoder(new BCryptPasswordEncoder());
         /*authenticationManagerBuilder.inMemoryAuthentication()
                 .withUser("admin").password("1234").roles("ADMIN","USER");
         authenticationManagerBuilder.inMemoryAuthentication()
