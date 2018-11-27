@@ -37,7 +37,7 @@
                 </div>
                 <div>
                     <label>Creation Date:</label>
-                    <label th:text="${account.creationDate}"></label>
+                    <label th:text="${#dates.format(account.creationDate,'yyyy-MM-dd HH:mm:ss')}"></label>
                 </div>
                 <div>
                     <label>Balance:</label>
@@ -120,7 +120,7 @@
                     <tr th:each="o:${operations}">
                         <td th:text="${o.opsNumber}"></td>
                         <td th:text="${o.class.simpleName}"></td>
-                        <td th:text="${o.operationDate}"></td>
+                        <td th:text="${#dates.format(o.operationDate,'yyyy-MM-dd HH:mm:ss')}"></td>
                         <td th:text="${o.amount}"></td>
                     </tr>
                 </table>
