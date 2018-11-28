@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorator="~{fragments/template1}" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>clients</title>
+</head>
+<body>
+<div class="row" layout:fragment="content">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="container">
+            <table class="table">
+                <tr>
+                    <th>Client Code</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr th:each="c:${clients}">
+                    <td th:text="${c.code}"></td>
+                    <td th:text="${c.name}"></td>
+                    <td th:text="${c.email}"></td>
+                    <td><button type="button" class="btn btn-outline-primary">Edit</button></td>
+                    <td><button type="button" class="btn btn-outline-danger">Delete</button></td>
+                </tr>
+            </table>
+            <ul class="pagination">
+                <li class="page-item" th:classappend="${page==0}? disabled">
+                    <a class="page-link"
+                       th:href="@{/customers(page=${page-1})}" }>Previous</a>
+                </li>
+                <li class="page-item" th:classappend="${i==page}? disabled"
+                    th:each="i:${#numbers.sequence(0,totalPages-1)}">
+                    <a class="page-link" th:text="${i}"
+                       th:href="@{/customers(page=${i})}"></a>
+                </li>
+                <li class="page-item" th:classappend="${page==totalPages-1}? disabled">
+                    <a class="page-link"
+                       th:href="@{/customers(page=${page+1})}" }>Next</a>
+                </li>
+            </ul>
+            <a th:href="@{/client}" class="btn btn-primary">New Client</a>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+</body>
+</html>
