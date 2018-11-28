@@ -16,15 +16,19 @@
                     <th>Client Code</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th></th>
-                    <th></th>
+                    <th sec:authorize="hasRole('ROLE_ADMIN')"></th>
+                    <th sec:authorize="hasRole('ROLE_ADMIN')"></th>
                 </tr>
                 <tr th:each="c:${clients}">
                     <td th:text="${c.code}"></td>
                     <td th:text="${c.name}"></td>
                     <td th:text="${c.email}"></td>
-                    <td><button type="button" class="btn btn-outline-primary">Edit</button></td>
-                    <td><button type="button" class="btn btn-outline-danger">Delete</button></td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')">
+                        <button type="button" class="btn btn-outline-primary">Edit</button>
+                    </td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')">
+                        <button type="button" class="btn btn-outline-danger">Delete</button>
+                    </td>
                 </tr>
             </table>
             <ul class="pagination">
@@ -42,7 +46,7 @@
                        th:href="@{/customers(page=${page+1})}" }>Next</a>
                 </li>
             </ul>
-            <a th:href="@{/client}" class="btn btn-primary">New Client</a>
+            <a th:href="@{/client}" class="btn btn-primary" sec:authorize="hasRole('ROLE_ADMIN')">New Client</a>
         </div>
     </div>
     <div class="col-md-2"></div>
