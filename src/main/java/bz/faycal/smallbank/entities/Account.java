@@ -18,6 +18,8 @@ public abstract class Account implements Serializable {
     private String accountCode;
     private Date creationDate;
     private double balance;
+    private Boolean suspended;
+
     @ManyToOne
     @JoinColumn(name = "client_code")
     private Client client;

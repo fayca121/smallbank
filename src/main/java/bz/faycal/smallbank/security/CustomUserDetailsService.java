@@ -1,4 +1,4 @@
-package bz.faycal.smallbank.service;
+package bz.faycal.smallbank.security;
 
 import bz.faycal.smallbank.entities.User;
 import bz.faycal.smallbank.repository.UserRepository;

@@ -19,6 +19,13 @@ public class Client implements Serializable {
     @OneToMany(mappedBy = "client",fetch = FetchType.LAZY)
     private List<Account> accounts;
 
+    @Transient
+    public boolean isSuspended(){
+        if(accounts!=null && !accounts.isEmpty())
+           return accounts.stream().allMatch(Account::getSuspended);
+        return false;
+    }
+
     public Client(String name, String email) {
         this.name = name;
         this.email = email;
