@@ -10,11 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import java.util.Optional;
 
 @Controller
 public class AccountController {
-    private static final int INITIAL_PAGE = 0;
     private static final int INITIAL_PAGE_SIZE = 5;
 
     private IBankService bankService;
@@ -31,12 +29,13 @@ public class AccountController {
 
 
     @GetMapping("/searchAccount")
-    public String searchAccount(Model model, String accountCode,@RequestParam("page") Optional<Integer> page){
+    public String searchAccount(Model model, String accountCode,
+                                @RequestParam(name="page",defaultValue = "0") int page){
         model.addAttribute("accountCode",accountCode);
-        model.addAttribute("page",page.orElse(0));
+        model.addAttribute("page",page);
         try {
             Account account = bankService.checkAccount(accountCode);
-            Page<Operation> operations=bankService.operationsList(accountCode,page.orElse(INITIAL_PAGE),
+            Page<Operation> operations=bankService.operationsList(accountCode,page,
                     INITIAL_PAGE_SIZE);
             model.addAttribute("operations",operations.getContent());
             model.addAttribute("totalPages",operations.getTotalPages());
