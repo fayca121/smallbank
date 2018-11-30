@@ -9,6 +9,6 @@ public interface IBankService {
     void deposit(String accountCode,double amount);
     void withdraw(String accountCode,double amount);
     void transfer(String accountSource,String accountTarget,double amount);
-    Page<Operation> operationsList(String accountCode,int page,int size);
+    Page<Operation> operationsPaginated(String accountCode, int page, int size);
 
 }

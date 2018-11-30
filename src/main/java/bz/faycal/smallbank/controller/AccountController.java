@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AccountController {
-    private static final int INITIAL_PAGE_SIZE = 5;
+    private static final int INITIAL_PAGE_SIZE = 10;
 
     private IBankService bankService;
 
@@ -35,7 +35,7 @@ public class AccountController {
         model.addAttribute("page",page);
         try {
             Account account = bankService.checkAccount(accountCode);
-            Page<Operation> operations=bankService.operationsList(accountCode,page,
+            Page<Operation> operations=bankService.operationsPaginated(accountCode,page,
                     INITIAL_PAGE_SIZE);
             model.addAttribute("operations",operations.getContent());
             model.addAttribute("totalPages",operations.getTotalPages());

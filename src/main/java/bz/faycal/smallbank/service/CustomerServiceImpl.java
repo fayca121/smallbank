@@ -69,7 +69,7 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    public Page<Client> clientList(int page, int size) {
+    public Page<Client> clientsPaginated(int page, int size) {
         return clientRepository.findAll(PageRequest.of(page,size));
     }
 }

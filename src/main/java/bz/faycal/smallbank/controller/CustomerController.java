@@ -28,7 +28,7 @@ public class CustomerController {
 
     @GetMapping("/customers")
     public String index(Model uiModel,@RequestParam(name = "page",defaultValue =  "0") int page){
-        Page<Client> clients= customerService.clientList (page,INITIAL_PAGE_SIZE);
+        Page<Client> clients= customerService.clientsPaginated(page,INITIAL_PAGE_SIZE);
         uiModel.addAttribute("page",page);
         uiModel.addAttribute("clients",clients.getContent());
         uiModel.addAttribute("totalPages",clients.getTotalPages());
@@ -42,9 +42,10 @@ public class CustomerController {
     }
 
     @PostMapping("/saveClient")
-    public String createClient(@ModelAttribute Client client){
-        customerService.saveClient(client);
-       return "redirect:/customers";
+    public String createClient(Model uiModel,@ModelAttribute Client client){
+        Client c=customerService.saveClient(client);
+        uiModel.addAttribute("successMessage","The client has been successfully saved");
+       return index(uiModel,0);
     }
 
     @GetMapping("/delClient")

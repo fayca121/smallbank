@@ -9,5 +9,5 @@ public interface ICustomerService {
     void deleteClient(Long code);
     Client saveClient(Client c);
     Client updateClient(Client c);
-    Page<Client> clientList(int page,int size);
+    Page<Client> clientsPaginated(int page, int size);
 }

@@ -67,7 +67,7 @@ public class BankServiceImpl implements IBankService {
     }
 
     @Override
-    public Page<Operation> operationsList(String accountCode, int page, int size) {
+    public Page<Operation> operationsPaginated(String accountCode, int page, int size) {
         return operationRepository.findAllOperationByAccount(accountCode,PageRequest.of(page,size));
     }
 }
