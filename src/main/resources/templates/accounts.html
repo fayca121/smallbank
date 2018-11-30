@@ -126,16 +126,23 @@
                 </table>
                 <ul class="pagination">
                     <li class="page-item" th:classappend="${page==0}? disabled">
-                        <a class="page-link"
-                           th:href="@{/searchAccount(page=(${page}-1),accountCode=${accountCode})}"}>Previous</a>
+                        <a class="page-link" th:href="@{/searchAccount(page=0,accountCode=${accountCode})}">First</a>
                     </li>
-                    <li class="page-item" th:classappend="${i==page}? disabled" th:each="i:${#numbers.sequence(0,(totalPages)-1)}">
+                    <li class="page-item" th:classappend="${page==0}? disabled">
+                        <a class="page-link"
+                           th:href="@{/searchAccount(page=(${page}-1),accountCode=${accountCode})}">Previous</a>
+                    </li>
+                    <li class="page-item" th:classappend="${i==page}? disabled"
+                        th:each="i:${#numbers.sequence(firstPage,lastPage)}">
                         <a class="page-link" th:text="${i}"
                            th:href="@{/searchAccount(page=${i},accountCode=${accountCode})}"></a>
                     </li>
                     <li class="page-item" th:classappend="${page==(totalPages)-1}? disabled">
                         <a class="page-link"
-                           th:href="@{/searchAccount(page=${page+1},accountCode=${accountCode})}"}>Next</a>
+                           th:href="@{/searchAccount(page=${page+1},accountCode=${accountCode})}">Next</a>
+                    </li>
+                    <li class="page-item" th:classappend="${page==(totalPages)-1}? disabled">
+                        <a class="page-link" th:href="@{/searchAccount(page=(${totalPages}-1),accountCode=${accountCode})}">Last</a>
                     </li>
                 </ul>
                 </div>

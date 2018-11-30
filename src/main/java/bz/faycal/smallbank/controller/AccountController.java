@@ -3,6 +3,7 @@ package bz.faycal.smallbank.controller;
 import bz.faycal.smallbank.entities.Account;
 import bz.faycal.smallbank.entities.Operation;
 import bz.faycal.smallbank.service.IBankService;
+import bz.faycal.smallbank.util.PaginationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,8 @@ public class AccountController {
                     INITIAL_PAGE_SIZE);
             model.addAttribute("operations",operations.getContent());
             model.addAttribute("totalPages",operations.getTotalPages());
+            model.addAttribute("firstPage", PaginationUtil.firstPage(page,operations.getTotalPages()));
+            model.addAttribute("lastPage", PaginationUtil.lastPage(page,operations.getTotalPages()));
             model.addAttribute("account",account);
         }catch (Exception e){
             model.addAttribute("exception",e);
