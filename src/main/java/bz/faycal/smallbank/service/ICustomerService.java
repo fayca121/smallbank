@@ -1,6 +1,7 @@
 package bz.faycal.smallbank.service;
 
 import bz.faycal.smallbank.entities.Client;
+import org.springframework.data.domain.Page;
 
 public interface ICustomerService {
     Client checkClient(String email);
@@ -8,4 +9,5 @@ public interface ICustomerService {
     void deleteClient(Long code);
     Client saveClient(Client c);
     Client updateClient(Client c);
+    Page<Client> clientList(int page,int size);
 }

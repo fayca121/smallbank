@@ -6,6 +6,8 @@ import bz.faycal.smallbank.exception.ClientNotFoundException;
 import bz.faycal.smallbank.repository.AccountRepository;
 import bz.faycal.smallbank.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,13 +29,13 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     public Client checkClient(String email) {
         return clientRepository.findByEmail(email)
-                .orElseThrow(()->new ClientNotFoundException("Client cloud'nt be found"));
+                .orElseThrow(()->new ClientNotFoundException("Client not found"));
     }
 
     @Override
     public Client checkClient(Long code) {
         return clientRepository.findById(code)
-                .orElseThrow(()->new ClientNotFoundException("Client cloud'nt be found"));
+                .orElseThrow(()->new ClientNotFoundException("Client not found"));
     }
 
     @Override
@@ -62,5 +64,10 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     public Client updateClient(Client c) {
         return saveClient(c);
+    }
+
+    @Override
+    public Page<Client> clientList(int page, int size) {
+        return clientRepository.findAll(PageRequest.of(page,size));
     }
 }
