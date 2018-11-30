@@ -34,14 +34,14 @@
             <ul class="pagination">
                 <li class="page-item" th:classappend="${page==0}? disabled">
                     <a class="page-link"
-                       th:href="@{/customers(page=${page-1})}" }>Previous</a>
+                       th:href="@{/customers(page=(${page}-1))}">Previous</a>
                 </li>
-                <li class="page-item" th:classappend="${i==page}? disabled"
-                    th:each="i:${#numbers.sequence(0,totalPages-1)}">
-                    <a class="page-link" th:text="${i}"
-                       th:href="@{/customers(page=${i})}"></a>
+                <li class="page-item" th:each="x:${#numbers.sequence(0,(totalPages)-1)}"
+                th:classappend="${x==page}? disabled">
+                    <a class="page-link" th:text="${x}"
+                       th:href="@{/customers(page=${x})}"></a>
                 </li>
-                <li class="page-item" th:classappend="${page==totalPages-1}? disabled">
+                <li class="page-item" th:classappend="${page==(totalPages)-1}? disabled">
                     <a class="page-link"
                        th:href="@{/customers(page=${page+1})}" }>Next</a>
                 </li>
