@@ -31,5 +31,6 @@ public abstract class Account implements Serializable {
         this.creationDate = creationDate;
         this.balance = balance;
         this.client = client;
+        this.suspended=false;
     }
 }
