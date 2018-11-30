@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
-      layout:decorator="~{fragments/template1}" xmlns:th="http://www.thymeleaf.org/"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      layout:decorator="~{fragments/template1}"
+      xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
     <title>client</title>
@@ -13,15 +13,16 @@
         <div class="card bg-light">
             <div class="card-header">Create/Update Client</div>
             <div class="card-body">
-                <form th:action="@{/newClient}" method="post">
+                <form th:action="@{/saveClient}" th:object="${client}" method="post">
                     <div class="form-group">
                         <label for="name">Name:</label>
-                        <input type="text" class="form-control" name="name" id="name">
+                        <input type="text" class="form-control" name="name" th:value="*{name}" id="name">
                     </div>
                     <div class="form-group">
                         <label for="email">Email address:</label>
-                        <input type="email" class="form-control" name="email" id="email">
+                        <input type="email" class="form-control" name="email" th:value="*{email}" id="email">
                     </div>
+                    <input type="hidden" name="code" th:value="*{code}"/>
                     <button type="submit" class="btn btn-primary mr-sm-2">Save</button>
                 </form>
             </div>
