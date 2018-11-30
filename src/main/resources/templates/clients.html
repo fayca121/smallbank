@@ -27,7 +27,7 @@
                         <button type="button" class="btn btn-outline-primary">Edit</button>
                     </td>
                     <td sec:authorize="hasRole('ROLE_ADMIN')">
-                        <button type="button" class="btn btn-outline-danger">Delete</button>
+                        <a th:href="@{/delClient(code=${c.code})}" class="btn btn-outline-danger">Delete</a>
                     </td>
                 </tr>
             </table>

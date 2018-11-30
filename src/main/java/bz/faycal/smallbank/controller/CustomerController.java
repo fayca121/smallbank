@@ -43,4 +43,14 @@ public class CustomerController {
         customerService.saveClient(c);
        return "redirect:/customers";
     }
+
+    @GetMapping("/delClient")
+    public String deleteClient(Model uiModel, Long code){
+        try {
+            customerService.deleteClient(code);
+        }catch (Exception e){
+            uiModel.addAttribute("exception",e);
+        }
+        return "redirect:/customers";
+    }
 }
